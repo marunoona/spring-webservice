@@ -9,7 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -45,5 +47,25 @@ public class MembersRepositoryTest {
         Members members = memberList.get(0);
         assertThat(members.getEmail(), is("ye_jin92@naver.com"));
         assertThat(members.getName(), is("예진"));
+    }
+
+    @Test
+    public void baseTimeEntity_save(){
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        membersRepository.save(Members.builder()
+                .name("예진")
+                .email("ye_jin92@naver.com")
+                .password("pwd123")
+                .phone("010-1234-5678")
+                .build());
+
+        //when
+        List<Members> memberList = membersRepository.findAll();
+
+        //then
+        Members members = memberList.get(0);
+        assertTrue(members.getCreatedDate().isAfter(now));
+        assertTrue(members.getModifiedDate().isAfter(now));
     }
 }

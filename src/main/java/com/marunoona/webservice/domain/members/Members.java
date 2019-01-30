@@ -1,5 +1,6 @@
 package com.marunoona.webservice.domain.members;
 
+import com.marunoona.webservice.domain.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Members {
+public class Members extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,7 @@ public class Members {
     private String phone;
 
     @Builder
-    public Members(String name, String email, String password, String phone){
+    public Members(String name, String email, String password, String phone) {
         this.name = name;
         this.email = email;
         this.password = password;
