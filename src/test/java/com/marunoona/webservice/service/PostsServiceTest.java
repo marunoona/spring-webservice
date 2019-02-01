@@ -61,8 +61,28 @@ public class PostsServiceTest {
         //when
         PostsResponseDto posts = postsService.findOneById(1);
 
-
         //then
         assertThat(posts.getTitle()).isEqualTo(dto.getTitle());
+    }
+
+    @Test
+    public void updatePosts(){
+        PostsRequestDto dto = PostsRequestDto.builder()
+                .title("타이틀1")
+                .content("내용1")
+                .build();
+        postsService.savePosts(dto);
+        PostsResponseDto responseDto = postsService.findOneById(1);
+        //when
+        dto.setId(responseDto.getId());
+        dto.setTitle("타이틀1");
+        dto.setContent("내용이바뀌었다.");
+        postsService.updatePost(dto);
+
+        //when
+        PostsResponseDto posts = postsService.findOneById(1);
+        assertThat(posts.getId()).isEqualTo(dto.getId());
+        assertThat(posts.getTitle()).isEqualTo("타이틀1");
+        assertThat(posts.getContent()).isEqualTo("내용이바뀌었다.");
     }
 }

@@ -9,6 +9,7 @@ import com.marunoona.webservice.webservice.MembersService;
 import com.marunoona.webservice.webservice.PostsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -38,16 +39,22 @@ public class WebRestController {
         return postsService.savePosts(dto);
     }
 
-    @GetMapping("/viewPost/{id}")
-    public ResponseEntity<Object> getPost(@PathVariable long id){
-        return ResponseEntity.ok().body(postsService.findById(id));
+    @GetMapping("/posts")
+    public String getPost(@RequestParam(name="id", defaultValue = "0") Long id, Model model){
+        model.addAttribute("post",postsService.findById(id));
+        return "post";
     }
 
     @PutMapping("/updatePost/{id}")
     public Long updatePosts(@PathVariable long id, @RequestBody PostsRequestDto dto){
         PostsResponseDto resDto = postsService.findOneById(id);
         dto.setId(resDto.getId());
-        return postsService.savePosts(dto);
+//
+//        Optional<Posts> posts = postsService.findById(id);
+//        postsService.findById(id).map(posts1 -> {
+//            posts1.
+//        })
+        return postsService.updatePost(dto);
     }
 
     @DeleteMapping("/deletePost/{id}")

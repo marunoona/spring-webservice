@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -40,8 +39,10 @@ public class PostsService {
         return postsRepository.findOneById(id);
     }
 
+    @Transactional
     public Long updatePost(PostsRequestDto dto){
-        return postsRepository.save(dto.toEntity()).getId();
+        //return postsRepository.save(dto.toEntity()).getId();
+        return savePosts(dto);
     }
 
     @Transactional

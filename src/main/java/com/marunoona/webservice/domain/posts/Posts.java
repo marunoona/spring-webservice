@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Posts extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -28,4 +28,6 @@ public class Posts extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+
+
 }

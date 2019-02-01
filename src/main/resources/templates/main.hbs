@@ -33,7 +33,7 @@
             {{#each posts}}
                 <tr>
                     <td>{{id}}</td>
-                    <td>{{title}}</td>
+                    <td><a href="/posts?id={{id}}">{{title}}</a></td>
                     <td>{{modifiedDate}}</td>
                     <td><button type="button" class="btn btn-primary" id="btn-deletePosts">삭제</button></td>
                 </tr>
