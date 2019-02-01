@@ -26,7 +26,6 @@
                     <th>게시글번호</th>
                     <th>제목</th>
                     <th>최종수정일</th>
-                    <th>삭제</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -35,7 +34,6 @@
                     <td>{{id}}</td>
                     <td><a href="/posts?id={{id}}">{{title}}</a></td>
                     <td>{{modifiedDate}}</td>
-                    <td><button type="button" class="btn btn-primary" id="btn-deletePosts">삭제</button></td>
                 </tr>
             {{/each}}
 

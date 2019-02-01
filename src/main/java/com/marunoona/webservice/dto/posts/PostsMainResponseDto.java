@@ -8,14 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Getter
-public class PostsResponseDto {
+public class PostsMainResponseDto {
 
     private Long id;
     private String title;
     private String content;
     private String modifiedDate;
 
-    public PostsResponseDto(Posts entity){
+    public PostsMainResponseDto(Posts entity){
         id = entity.getId();
         title = entity.getTitle();
         content = entity.getContent();

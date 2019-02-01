@@ -1,3 +1,8 @@
+/**
+ * main.hbs
+ * @type {{init: main.init, saveMembers: main.saveMembers, savePosts: main.savePosts}}
+ */
+
 var main = {
     init: function () {
         var _this = this;
@@ -8,14 +13,6 @@ var main = {
         $('#btn-savePosts').on('click', function () {
             _this.savePosts();
         });
-
-        $('#btn-deletePosts').on('click', function () {
-            _this.deletePosts();
-        });
-    },
-
-    deletePosts: function(){
-
     },
 
     saveMembers: function () {

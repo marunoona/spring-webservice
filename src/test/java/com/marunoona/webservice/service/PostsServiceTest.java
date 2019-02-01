@@ -2,18 +2,15 @@ package com.marunoona.webservice.service;
 
 import com.marunoona.webservice.domain.posts.Posts;
 import com.marunoona.webservice.domain.posts.PostsRepository;
-import com.marunoona.webservice.dto.posts.PostsRequestDto;
-import com.marunoona.webservice.dto.posts.PostsResponseDto;
+import com.marunoona.webservice.dto.posts.PostsSaveRequestDto;
+import com.marunoona.webservice.dto.posts.PostsMainResponseDto;
 import com.marunoona.webservice.webservice.PostsService;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.expression.spel.ast.OpGE;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,7 +32,7 @@ public class PostsServiceTest {
     @Test
     public void dtoDataSaveIntoPosts(){
         //given
-        PostsRequestDto dto = PostsRequestDto.builder()
+        PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
                 .title("타이틀1")
                 .content("내용1")
                 .build();
@@ -52,14 +49,14 @@ public class PostsServiceTest {
     @Test
     public void findOneById(){
         //given
-        PostsRequestDto dto = PostsRequestDto.builder()
+        PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
                 .title("타이틀1")
                 .content("내용1")
                 .build();
         postsService.savePosts(dto);
 
         //when
-        PostsResponseDto posts = postsService.findOneById(1);
+        PostsMainResponseDto posts = postsService.findOneById(1);
 
         //then
         assertThat(posts.getTitle()).isEqualTo(dto.getTitle());
@@ -67,12 +64,12 @@ public class PostsServiceTest {
 
     @Test
     public void updatePosts(){
-        PostsRequestDto dto = PostsRequestDto.builder()
+        PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
                 .title("타이틀1")
                 .content("내용1")
                 .build();
         postsService.savePosts(dto);
-        PostsResponseDto responseDto = postsService.findOneById(1);
+        PostsMainResponseDto responseDto = postsService.findOneById(1);
         //when
         dto.setId(responseDto.getId());
         dto.setTitle("타이틀1");
@@ -80,7 +77,7 @@ public class PostsServiceTest {
         postsService.updatePost(dto);
 
         //when
-        PostsResponseDto posts = postsService.findOneById(1);
+        PostsMainResponseDto posts = postsService.findOneById(1);
         assertThat(posts.getId()).isEqualTo(dto.getId());
         assertThat(posts.getTitle()).isEqualTo("타이틀1");
         assertThat(posts.getContent()).isEqualTo("내용이바뀌었다.");

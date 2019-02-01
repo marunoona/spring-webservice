@@ -1,6 +1,6 @@
 package com.marunoona.webservice.domain.posts;
 
-import com.marunoona.webservice.dto.posts.PostsResponseDto;
+import com.marunoona.webservice.dto.posts.PostsMainResponseDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -53,7 +52,7 @@ public class PostsRepositoryTest {
                 .build());
 
         //when
-        PostsResponseDto dto = postsRepository.findOneById(1);
+        PostsMainResponseDto dto = postsRepository.findOneById(1);
 
         //then
         assertThat(dto.getTitle(), is("타이틀1"));

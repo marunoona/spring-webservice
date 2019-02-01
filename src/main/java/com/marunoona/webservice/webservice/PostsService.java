@@ -2,8 +2,9 @@ package com.marunoona.webservice.webservice;
 
 import com.marunoona.webservice.domain.posts.Posts;
 import com.marunoona.webservice.domain.posts.PostsRepository;
-import com.marunoona.webservice.dto.posts.PostsRequestDto;
-import com.marunoona.webservice.dto.posts.PostsResponseDto;
+import com.marunoona.webservice.dto.posts.PostsInfoResponseDto;
+import com.marunoona.webservice.dto.posts.PostsSaveRequestDto;
+import com.marunoona.webservice.dto.posts.PostsMainResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,28 +20,24 @@ public class PostsService {
     private PostsRepository postsRepository;
 
     @Transactional
-    public Long savePosts(PostsRequestDto dto){
+    public Long savePosts(PostsSaveRequestDto dto){
+
         return postsRepository.save(dto.toEntity()).getId();
     }
 
     @Transactional
-    public List<PostsResponseDto> findAllDesc(){
-        return postsRepository.findAllDesc().map(PostsResponseDto::new)
+    public List<PostsMainResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc().map(PostsMainResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public Optional<Posts> findById(long id){
-        return postsRepository.findById(id);
+    public PostsInfoResponseDto findPosts(Long id){
+        return postsRepository.findById(id).map(PostsInfoResponseDto::new).get();
     }
 
     @Transactional
-    public PostsResponseDto findOneById(long id){
-        return postsRepository.findOneById(id);
-    }
-
-    @Transactional
-    public Long updatePost(PostsRequestDto dto){
+    public Long updatePost(PostsSaveRequestDto dto){
         //return postsRepository.save(dto.toEntity()).getId();
         return savePosts(dto);
     }
