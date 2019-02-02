@@ -15,12 +15,13 @@
             <td>제목 : {{post.title}}</td>
         </tr>
         <tr>
-            <td colspan="2">{{post.content}}</td>
+            <td colspan="3">{{post.content}}</td>
         </tr>
         <tr>
-            <button type="button" class="btn btn-info">목록</button>
+            <button type="button" class="btn btn-info" id="btn-list">목록</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modifyPostModal">수정</button>
-            <button type="button" class="btn btn-danger">삭제</button>
+            <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+            <input type="hidden" id="delete-id" value="{{post.id}}">
         </tr>
     </table>
     <div class="modal fade" id="modifyPostModal" tabindex="-1" role="dialog" aria-labelledby="modifyPostLabel"
@@ -57,8 +58,8 @@
 
     <!-- 부트스트랩 js, jquery 추가-->
     <script src="/js/lib/jquery.min.js"></script>
-    <scipt src="/js/lib/bootstrap.min.js"></scipt>
+    <script src="/js/lib/bootstrap.min.js"></script>
     <!--post.js-->
-    <scipt src="/js/app/post.js"></scipt>
+    <script src="/js/app/post.js"></script>
 </body>
 </html>

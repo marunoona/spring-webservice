@@ -2,6 +2,7 @@ package com.marunoona.webservice.web;
 
 import com.marunoona.webservice.domain.members.MembersRepository;
 import com.marunoona.webservice.dto.members.MembersSaveRequestDto;
+import com.marunoona.webservice.dto.posts.PostsModifyRequestDto;
 import com.marunoona.webservice.dto.posts.PostsSaveRequestDto;
 import com.marunoona.webservice.dto.posts.PostsMainResponseDto;
 import com.marunoona.webservice.webservice.MembersService;
@@ -36,15 +37,13 @@ public class WebRestController {
         return postsService.savePosts(dto);
     }
 
-    @PostMapping("/posts/modify")
+    @PutMapping("/posts/modify")
+    public Long modifyPosts(@RequestBody PostsModifyRequestDto dto){
+        return postsService.modify(dto);
+    }
 
-
-    @DeleteMapping("/deletePost/{id}")
-    public ResponseEntity<Object> deletePosts(@PathVariable long id){
-        int result = postsService.deleteById(id);
-        if(result <= 0){
-            return ResponseEntity.ok().body(new String("NOT FOUND"));
-        }
-        return ResponseEntity.ok().body(new String("DELETE SUCCESSFULLY"));
+    @DeleteMapping("/posts/delete")
+    public Long deletePosts(@RequestBody Long id){
+        return postsService.delete(id);
     }
 }

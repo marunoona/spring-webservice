@@ -3,6 +3,7 @@ package com.marunoona.webservice.webservice;
 import com.marunoona.webservice.domain.posts.Posts;
 import com.marunoona.webservice.domain.posts.PostsRepository;
 import com.marunoona.webservice.dto.posts.PostsInfoResponseDto;
+import com.marunoona.webservice.dto.posts.PostsModifyRequestDto;
 import com.marunoona.webservice.dto.posts.PostsSaveRequestDto;
 import com.marunoona.webservice.dto.posts.PostsMainResponseDto;
 import lombok.AllArgsConstructor;
@@ -37,19 +38,19 @@ public class PostsService {
     }
 
     @Transactional
-    public Long updatePost(PostsSaveRequestDto dto){
-        //return postsRepository.save(dto.toEntity()).getId();
-        return savePosts(dto);
+    public Long modify(PostsModifyRequestDto dto) {
+        if (postsRepository.existsById(dto.getId())) {
+            postsRepository.modify(dto.getTitle(), dto.getContent(), dto.getId());
+        }
+        return dto.getId();
     }
 
     @Transactional
-    public int deleteById(long id){
-        if(postsRepository.findById(id) == null){
-            return -1;
-        }else {
+    public Long delete(Long id){
+        if(postsRepository.existsById(id)){
             postsRepository.deleteById(id);
-            return 1;
         }
+        return id;
     }
 }
 
